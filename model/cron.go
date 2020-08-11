@@ -2,12 +2,11 @@ package model
 
 import (
 	"licron.com/global"
-	"licron.com/schedule/types"
 )
 
 // cron数据库表达式
 type Cron struct {
-	ID      int `gorm:"primary_key"`
+	ID      int
 	Name    string
 	Exp     string
 	Command string
@@ -15,8 +14,12 @@ type Cron struct {
 	IsDel   int
 }
 
-func (c Cron) GetAll() ([]*types.Cron, error) {
-	var r []*types.Cron
+func (c Cron) TableName() string {
+	return "cron"
+}
+
+func (c Cron) GetAll() ([]*Cron, error) {
+	var r []*Cron
 	if err := global.G_DB.Where("is_del=?", 0).Find(&r).Error; err != nil {
 		return nil, err
 	}

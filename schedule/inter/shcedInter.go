@@ -6,8 +6,7 @@ import (
 
 // 任务的通知接口方法
 type Schedule interface {
-	AddNotify(c *types.Deamon)
-	DelNotify(c *types.Deamon)
-	UpdateNotify(c *types.Deamon)
-	KillNotify(c *types.Deamon)
+	AddNotify(c *types.Cron)
+	UpdateNotify(c *types.Cron)
+	KillNotify(c *types.Cron)
 }
