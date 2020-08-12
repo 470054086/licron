@@ -7,7 +7,7 @@ import (
 
 // 定时任务的路由
 func DeamonRouter(r *gin.RouterGroup) {
-	group := r.Group("/deamon")
+	group := r.Group("/daemon")
 	{
 		// 添加
 		group.POST("/add", deamon.Add)
