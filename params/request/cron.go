@@ -16,7 +16,6 @@ type CronListRequest struct {
 }
 
 // 定义返回格式
-
 type CronListResponse struct {
 	ID        int       `json:"id"`
 	Name      string    `json:"name"`

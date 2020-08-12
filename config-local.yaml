@@ -2,7 +2,7 @@ app:
   domain: 'http://licron.com'
   port: '8088'
   dbtype: 'mysql'
-  schedule: 'false'
+  schedule: 'true'
 log:
   dir: './logs/'
   format: 'json'

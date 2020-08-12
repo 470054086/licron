@@ -45,7 +45,7 @@ func New() *Log {
 	// 这里可以尝试加上requestId等其他的公共的属性
 	fields := logger.WithFields(logrus.Fields{
 		"ip":     "127.0.0.1",
-		"author": "lishuang@qq.com",
+		"author": "xx@qq.com",
 	})
 	l.entry = fields
 	l.logger = logger
@@ -79,7 +79,7 @@ func (l *Log) Channel(channel string) *logrus.Entry {
 		// 这里可以尝试加上requestId等其他的公共的属性
 		fields := logger.WithFields(logrus.Fields{
 			"ip":     "127.0.0.1",
-			"author": "lishuang@qq.com",
+			"author": "xx@qq.com",
 		})
 		l.loggerStatic[channel] = fields
 	}
