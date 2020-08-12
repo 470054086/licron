@@ -9,6 +9,7 @@ import (
 func OnceRouter(r *gin.RouterGroup) {
 	group := r.Group("/once")
 	{
-		group.POST("/lists", oncecron.Lists)
+		group.POST("/add", oncecron.Add)
+		group.POST("/kill", oncecron.Kill)
 	}
 }

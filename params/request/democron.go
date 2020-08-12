@@ -7,3 +7,8 @@ type DeamonRequest struct {
 type DeamonKillRequest struct {
 	ID int `json:"id" binding:"required"`
 }
+
+// 查询的参数
+type DeamonListRequest struct {
+	PageRequest
+}

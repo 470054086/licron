@@ -11,5 +11,6 @@ func CronRouter(r *gin.RouterGroup) {
 	{
 		group.POST("/lists", cron.Lists)
 		group.POST("/add", cron.Add)
+		group.POST("/kill", cron.Kill)
 	}
 }

@@ -11,8 +11,8 @@ type Cron struct {
 	Exp      string
 	Command  string
 	Desc     string
-	IsDel    int
-	IsOnline int
+	Runat    time.Time
+	IsKiller int
 	Types    int
 }
 

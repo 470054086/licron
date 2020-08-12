@@ -3,7 +3,9 @@ package schedule
 import (
 	"fmt"
 	"licron.com/global"
+	"licron.com/model"
 	"licron.com/schedule/cmd"
+	"licron.com/schedule/constans"
 	"licron.com/schedule/types"
 	"sync"
 )
@@ -23,6 +25,10 @@ type BaseSchedule struct {
 	execCancel map[int]*cmd.ExecCommand
 	// 正在执行的任务
 	executionSchedule map[int]*types.Cron
+	cronModel         model.Cron
+	daemonModel       model.Daemon
+	onceModel         model.OnceCron
+
 	// 当前正在执行的任务
 	cronRun []*types.Cron
 	lock    *sync.RWMutex
@@ -46,8 +52,7 @@ func (s *BaseSchedule) UpdateNotify(c *types.Cron) {
 	s.updateSchedule <- c
 }
 
-// 修改任务 等待任务执行完成了 下次进入的时候再次修改
-// todo 如果是
+// 修改任务
 func (s *BaseSchedule) updateCron(c *types.Cron) bool {
 	return true
 }
@@ -74,6 +79,17 @@ func (s *BaseSchedule) killCron(c *types.Cron) bool {
 // 杀死任务回调通知
 func (s *BaseSchedule) killCronBack(c *types.Cron) bool {
 	global.G_LOG.Info(fmt.Sprintf("任务kill成功,任务ID为%d,任务名称为%s", c.ID, c.Name))
+	// 取消正在运行
+	s.delExecution(c)
+	switch c.Types {
+	case constans.NormalType:
+		s.cronModel.Killer(c.ID)
+	case constans.DaemonType:
+		// 改变数据库状态
+		s.daemonModel.Killer(c.ID)
+	case constans.OnceType:
+		s.onceModel.Killer(c.ID)
+	}
 	return true
 }
 

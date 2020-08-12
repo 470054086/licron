@@ -3,7 +3,6 @@ package schedule
 import (
 	"context"
 	"github.com/gorhill/cronexpr"
-	"licron.com/model"
 	"licron.com/schedule/cmd"
 	"licron.com/schedule/constans"
 	"licron.com/schedule/types"
@@ -19,17 +18,15 @@ type SimpleSchedule struct {
 	cronExpr []*types.CronExpr
 }
 
-var c model.Cron
-
 // 初始化操作
-func NewSimple(execNum, addNum, delNum, killNum, updateNum int) *SimpleSchedule {
+func NewSimple(chanNum int) *SimpleSchedule {
 	return &SimpleSchedule{
 		BaseSchedule: BaseSchedule{
-			execChan:          make(chan *types.CronExcel, execNum),
-			execKillChan:      make(chan *types.Cron, execNum),
-			addSchedule:       make(chan *types.Cron, addNum),
-			killSchedule:      make(chan *types.Cron, killNum),
-			updateSchedule:    make(chan *types.Cron, updateNum),
+			execChan:          make(chan *types.CronExcel, chanNum),
+			execKillChan:      make(chan *types.Cron, chanNum),
+			addSchedule:       make(chan *types.Cron, chanNum),
+			killSchedule:      make(chan *types.Cron, chanNum),
+			updateSchedule:    make(chan *types.Cron, chanNum),
 			execCancel:        make(map[int]*cmd.ExecCommand),
 			executionSchedule: make(map[int]*types.Cron),
 			lock:              &sync.RWMutex{},
@@ -42,7 +39,7 @@ func (s *SimpleSchedule) Run() {
 	// 获取所有的消息处理
 	go s.schedule()
 	// 获取到全部的计划任务
-	crons, _ := c.GetAll()
+	crons, _ := s.cronModel.GetAll()
 	//解析全部的任务 获取到任务的下次执行时间
 	for _, r := range crons {
 		t := &types.Cron{
@@ -51,8 +48,7 @@ func (s *SimpleSchedule) Run() {
 			Exp:      r.Exp,
 			Command:  r.Command,
 			Desc:     r.Desc,
-			IsDel:    0,
-			IsOnline: 0,
+			IsKiller: 0,
 			Types:    constans.NormalType,
 		}
 		s.addCron(t)
@@ -82,8 +78,11 @@ func (s *SimpleSchedule) Run() {
 			}
 		}
 		// 根据下次执行时间进行排序 睡眠最近的执行时间
-		sort.Sort(types.CronSort(s.cronExpr))
-		time.Sleep(s.cronExpr[0].Next.Sub(time.Now()))
+		if s.cronExpr != nil {
+			sort.Sort(types.CronSort(s.cronExpr))
+			time.Sleep(s.cronExpr[0].Next.Sub(time.Now()))
+		}
+		time.Sleep(time.Second * 1)
 	}
 }
 

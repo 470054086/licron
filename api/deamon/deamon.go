@@ -16,7 +16,7 @@ var (
 func init() {
 	daemonService = &service.DeamonService{}
 }
-
+// 添加任务
 func Add(c *gin.Context) {
 	var r request.DeamonRequest
 	if err := c.ShouldBindJSON(&r); err != nil {
@@ -33,7 +33,7 @@ func Add(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, utils.ResponseSuccess())
 }
-
+// 杀死任务
 func Kill(c *gin.Context) {
 	var r request.DeamonKillRequest
 	if err := c.ShouldBindJSON(&r); err != nil {
