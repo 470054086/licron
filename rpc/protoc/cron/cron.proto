@@ -1,0 +1,69 @@
+syntax = "proto3";
+package cron;
+
+// Cron服务方法
+service Cron {
+  // 获取列表页
+  rpc Lists(ListRequest) returns(ListResponse);
+  // 添加数据
+  rpc Add(AddRequest) returns(Error);
+  // 更改数据
+  rpc Update(UpdateRequest) returns(Error);
+  // 杀死数据
+  rpc Killer(KillerRequest) returns(Error);
+  // 启动杀死的数据
+  rpc OnLine(KillerRequest) returns(Error);
+
+}
+// 列表页 请求参数
+message ListRequest {
+  SearchPage page = 1 ;
+}
+// 列表页返回参数
+message ListResponse {
+  repeated CronList items = 1;
+}
+
+// 添加的请求参数
+message AddRequest {
+  CronBase  r = 1 ;
+}
+message UpdateRequest {
+  int32  id = 1;
+  CronBase r = 2 ;
+}
+
+message KillerRequest {
+  int32  id = 1;
+}
+
+
+// 请求的基础数据
+message CronBase {
+  string name = 1 ;
+  string exp = 2 ;
+  string  command = 3 ;
+  string  desc = 4 ;
+  int32   is_killer = 5;
+}
+
+//  返回数据的基础数据
+message  CronList {
+  int32 id = 1;
+  string  name = 2 ;
+  string  exp = 3 ;
+  string command = 4 ;
+  string desc = 5;
+  string created_at = 6;
+  string updated_at = 7;
+  int32  is_killer = 8;
+}
+// 请求分页
+message SearchPage {
+  int32  page = 1 ;
+  int32  page_size = 2 ;
+}
+// 不需要返回参数的数据
+message Error {
+}
+
