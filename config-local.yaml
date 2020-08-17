@@ -2,7 +2,7 @@ app:
   domain: 'http://licron.com'
   port: '8088'
   dbtype: 'mysql'
-  schedule: 'false'
+  schedule: 'true'
   cronrpcport: '9090'
   cronrpchost: '127.0.0.1'
   daemonrpchost: '127.0.0.1'
