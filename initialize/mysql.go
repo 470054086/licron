@@ -13,6 +13,7 @@ func InitMysql() {
 		panic(fmt.Sprintf("mysql not config"))
 	}
 	mysqlConfig := config.Username + ":" + config.Password + "@(" + config.Path + ")/" + config.Dbname + "?" + config.Config
+	fmt.Println(mysqlConfig)
 	if db, err := gorm.Open("mysql", mysqlConfig); err != nil {
 		panic(fmt.Sprintf("mysql start is error %v", err))
 	} else {
