@@ -1,9 +1,11 @@
 package service
 
 import (
+	"context"
 	"licron.com/global"
 	"licron.com/model"
 	"licron.com/params/request"
+	"licron.com/rpc/protoc/cron"
 	"licron.com/schedule/constans"
 	"licron.com/schedule/types"
 )
@@ -14,21 +16,22 @@ type Cron struct {
 
 // 获取全部的数据
 func (c *Cron) Lists(r *request.CronListRequest) ([]*request.CronListResponse, error) {
-	lists, err := c.cronModel.GetAll()
+	l := &cron.ListRequest{}
+	lists, err := global.G_RPC_CRON.Lists(context.Background(), l)
 	if err != nil {
 		return nil, err
 	}
 	var data []*request.CronListResponse
-	for _, v := range lists {
+	for _, v := range lists.GetItems() {
 		d := request.CronListResponse{
-			ID:        v.ID,
+			ID:        int(v.Id),
 			Name:      v.Name,
 			Exp:       v.Exp,
 			Command:   v.Command,
 			Desc:      v.Desc,
 			CreatedAt: v.CreatedAt,
 			UpdatedAt: v.UpdatedAt,
-			IsKiller:  v.IsKiller,
+			IsKiller:  int(v.IsKiller),
 		}
 		data = append(data, &d)
 	}
@@ -36,6 +39,19 @@ func (c *Cron) Lists(r *request.CronListRequest) ([]*request.CronListResponse, e
 }
 
 func (c *Cron) Add(r *request.CronRequest) error {
+	// 调取rpc进行处理
+	rpcRequrst := &cron.AddRequest{R: &cron.CronBase{
+		Name:     r.Name,
+		Exp:      r.Exp,
+		Command:  r.Command,
+		Desc:     r.Desc,
+		IsKiller: 0,
+	}}
+	_, err := global.G_RPC_CRON.Add(context.Background(), rpcRequrst)
+	if err != nil {
+		return nil
+	}
+	// 生成数据 进行通知
 	m := types.Cron{
 		Name:     r.Name,
 		Exp:      r.Exp,
@@ -43,33 +59,32 @@ func (c *Cron) Add(r *request.CronRequest) error {
 		Desc:     r.Desc,
 		IsKiller: 0,
 	}
-	if err := global.G_DB.Save(&m).Error; err != nil {
-		return err
-	}
 	global.G_Schedule.AddNotify(&m)
 	return nil
 }
 
 func (d *Cron) Killer(r *request.DeamonKillRequest) error {
 	// 判断是否存在
-	id := r.ID
-	if cron, err := d.cronModel.GetFirstById(id); err != nil {
+	var rpcRequrst = cron.KillerRequest{Id: int32(r.ID)}
+	if _, err := global.G_RPC_CRON.Killer(context.Background(), &rpcRequrst); err != nil {
 		return err
 	} else {
+		var idRequest = cron.IdRequest{Id: int32(r.ID)}
+		cron, _ := global.G_RPC_CRON.GetFirstById(context.Background(), &idRequest)
 		t := d.TransFrom(cron)
 		global.G_Schedule.KillNotify(t)
 	}
 	return nil
 }
 
-func (d *Cron) TransFrom(cron *model.Cron) *types.Cron {
+func (d *Cron) TransFrom(cron *cron.CronBase) *types.Cron {
 	return &types.Cron{
-		ID:       cron.ID,
+		ID:       int(cron.Id),
 		Name:     cron.Name,
 		Exp:      cron.Exp,
 		Command:  cron.Command,
 		Desc:     cron.Desc,
-		IsKiller: cron.IsKiller,
+		IsKiller: int(cron.IsKiller),
 		Types:    constans.NormalType,
 	}
 }

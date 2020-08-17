@@ -2,6 +2,8 @@ package schedule
 
 import (
 	"context"
+	"licron.com/global"
+	"licron.com/rpc/protoc/daemon"
 	"licron.com/schedule/cmd"
 	"licron.com/schedule/types"
 	"licron.com/service"
@@ -37,9 +39,20 @@ func (s *DaemonSchedule) Run() {
 	// 获取所有的消息处理
 	go s.schedule()
 	// 获取到全部的常驻内存服务
-	crons, _ := s.daemonModel.GetAll()
-	for _, v := range crons {
-		t := s.daemonService.TransFrom(v)
+	crons, _ := global.G_RPC_DAEMON.Lists(context.Background(), nil)
+	for _, v := range crons.Items {
+		c := &daemon.CronBase{
+			Name:      v.Name,
+			Exp:       "",
+			Command:   v.Command,
+			Desc:      v.Desc,
+			IsKiller:  v.IsKiller,
+			RunAt:     "",
+			CreatedAt: v.CreatedAt,
+			UpdatedAt: v.UpdatedAt,
+			Id:        0,
+		}
+		t := s.daemonService.TransFrom(c)
 		s.cronRun = append(s.cronRun, t)
 	}
 	// 循环全部的变量 为每个任务启动一个goruntime

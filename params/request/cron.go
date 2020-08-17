@@ -1,7 +1,5 @@
 package request
 
-import "time"
-
 // CronRequest请求表达式
 type CronRequest struct {
 	Name    string `json:"name" binding:"required"`
@@ -22,7 +20,7 @@ type CronListResponse struct {
 	Exp       string    `json:"exp"`
 	Command   string    `json:"command"`
 	Desc      string    `json:"desc"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 	IsKiller  int       `json:"is_killer"`
 }

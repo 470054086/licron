@@ -35,7 +35,6 @@ func init() {
 	if err := v.Unmarshal(&global.G_Config); err != nil {
 		panic(fmt.Errorf("config changge error: %s \n", err))
 	}
-	fmt.Printf("%+v",global.G_Config)
 	// 监听文件
 	v.WatchConfig()
 	// 文件变化 重新加载内容

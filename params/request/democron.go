@@ -12,3 +12,14 @@ type DeamonKillRequest struct {
 type DeamonListRequest struct {
 	PageRequest
 }
+
+// 定义返回格式
+type DaemonListResponse struct {
+	ID        int       `json:"id"`
+	Name      string    `json:"name"`
+	Command   string    `json:"command"`
+	Desc      string    `json:"desc"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
+	IsKiller  int       `json:"is_killer"`
+}

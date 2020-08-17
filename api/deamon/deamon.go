@@ -16,6 +16,23 @@ var (
 func init() {
 	daemonService = &service.DeamonService{}
 }
+// 获取所有的列表
+func Lists(c *gin.Context) {
+	var r request.DeamonListRequest
+	if err := c.ShouldBindJSON(&r); err != nil {
+		paramError := utils.ResponseParamError()
+		c.JSON(http.StatusOK, paramError)
+		return
+	}
+	lists, err := daemonService.Lists(&r)
+	if err != nil {
+		paramError := utils.ResponseActionError()
+		c.JSON(http.StatusOK, paramError)
+		return
+	}
+	c.JSON(http.StatusOK, lists)
+}
+
 // 添加任务
 func Add(c *gin.Context) {
 	var r request.DeamonRequest

@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.12.3
-// source: cron.proto
+// source: daemon.proto
 
-package cron
+package daemon
 
 import (
 	context "context"
@@ -41,7 +41,7 @@ type ListRequest struct {
 func (x *ListRequest) Reset() {
 	*x = ListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[0]
+		mi := &file_daemon_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -54,7 +54,7 @@ func (x *ListRequest) String() string {
 func (*ListRequest) ProtoMessage() {}
 
 func (x *ListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[0]
+	mi := &file_daemon_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -67,7 +67,7 @@ func (x *ListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRequest.ProtoReflect.Descriptor instead.
 func (*ListRequest) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{0}
+	return file_daemon_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ListRequest) GetPage() *SearchPage {
@@ -83,13 +83,13 @@ type ListResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Items []*CronList `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Items []*DaemonList `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 }
 
 func (x *ListResponse) Reset() {
 	*x = ListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[1]
+		mi := &file_daemon_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -102,7 +102,7 @@ func (x *ListResponse) String() string {
 func (*ListResponse) ProtoMessage() {}
 
 func (x *ListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[1]
+	mi := &file_daemon_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -115,10 +115,10 @@ func (x *ListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListResponse.ProtoReflect.Descriptor instead.
 func (*ListResponse) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{1}
+	return file_daemon_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListResponse) GetItems() []*CronList {
+func (x *ListResponse) GetItems() []*DaemonList {
 	if x != nil {
 		return x.Items
 	}
@@ -137,7 +137,7 @@ type AddRequest struct {
 func (x *AddRequest) Reset() {
 	*x = AddRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[2]
+		mi := &file_daemon_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -150,7 +150,7 @@ func (x *AddRequest) String() string {
 func (*AddRequest) ProtoMessage() {}
 
 func (x *AddRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[2]
+	mi := &file_daemon_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -163,7 +163,7 @@ func (x *AddRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddRequest.ProtoReflect.Descriptor instead.
 func (*AddRequest) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{2}
+	return file_daemon_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddRequest) GetR() *CronBase {
@@ -185,7 +185,7 @@ type UpdateRequest struct {
 func (x *UpdateRequest) Reset() {
 	*x = UpdateRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[3]
+		mi := &file_daemon_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -198,7 +198,7 @@ func (x *UpdateRequest) String() string {
 func (*UpdateRequest) ProtoMessage() {}
 
 func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[3]
+	mi := &file_daemon_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -211,7 +211,7 @@ func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRequest) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{3}
+	return file_daemon_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UpdateRequest) GetId() int32 {
@@ -226,100 +226,6 @@ func (x *UpdateRequest) GetR() *CronBase {
 		return x.R
 	}
 	return nil
-}
-
-type KillerRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *KillerRequest) Reset() {
-	*x = KillerRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *KillerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*KillerRequest) ProtoMessage() {}
-
-func (x *KillerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use KillerRequest.ProtoReflect.Descriptor instead.
-func (*KillerRequest) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *KillerRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-type IdRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *IdRequest) Reset() {
-	*x = IdRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *IdRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IdRequest) ProtoMessage() {}
-
-func (x *IdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IdRequest.ProtoReflect.Descriptor instead.
-func (*IdRequest) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *IdRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
 }
 
 // 请求的基础数据
@@ -342,7 +248,7 @@ type CronBase struct {
 func (x *CronBase) Reset() {
 	*x = CronBase{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[6]
+		mi := &file_daemon_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -355,7 +261,7 @@ func (x *CronBase) String() string {
 func (*CronBase) ProtoMessage() {}
 
 func (x *CronBase) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[6]
+	mi := &file_daemon_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +274,7 @@ func (x *CronBase) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CronBase.ProtoReflect.Descriptor instead.
 func (*CronBase) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{6}
+	return file_daemon_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CronBase) GetName() string {
@@ -434,39 +340,31 @@ func (x *CronBase) GetId() int32 {
 	return 0
 }
 
-//  返回数据的基础数据
-type CronList struct {
+type KillerRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Exp       string `protobuf:"bytes,3,opt,name=exp,proto3" json:"exp,omitempty"`
-	Command   string `protobuf:"bytes,4,opt,name=command,proto3" json:"command,omitempty"`
-	Desc      string `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
-	CreatedAt string `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt string `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	IsKiller  int32  `protobuf:"varint,8,opt,name=is_killer,json=isKiller,proto3" json:"is_killer,omitempty"`
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *CronList) Reset() {
-	*x = CronList{}
+func (x *KillerRequest) Reset() {
+	*x = KillerRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[7]
+		mi := &file_daemon_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *CronList) String() string {
+func (x *KillerRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CronList) ProtoMessage() {}
+func (*KillerRequest) ProtoMessage() {}
 
-func (x *CronList) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[7]
+func (x *KillerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_daemon_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,61 +375,155 @@ func (x *CronList) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CronList.ProtoReflect.Descriptor instead.
-func (*CronList) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{7}
+// Deprecated: Use KillerRequest.ProtoReflect.Descriptor instead.
+func (*KillerRequest) Descriptor() ([]byte, []int) {
+	return file_daemon_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CronList) GetId() int32 {
+func (x *KillerRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *CronList) GetName() string {
+type IdRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *IdRequest) Reset() {
+	*x = IdRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_daemon_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdRequest) ProtoMessage() {}
+
+func (x *IdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_daemon_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdRequest.ProtoReflect.Descriptor instead.
+func (*IdRequest) Descriptor() ([]byte, []int) {
+	return file_daemon_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *IdRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+//  返回数据的基础数据
+type DaemonList struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int32  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Command   string `protobuf:"bytes,3,opt,name=command,proto3" json:"command,omitempty"`
+	Desc      string `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
+	CreatedAt string `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt string `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	IsKiller  int32  `protobuf:"varint,7,opt,name=is_killer,json=isKiller,proto3" json:"is_killer,omitempty"`
+}
+
+func (x *DaemonList) Reset() {
+	*x = DaemonList{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_daemon_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DaemonList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DaemonList) ProtoMessage() {}
+
+func (x *DaemonList) ProtoReflect() protoreflect.Message {
+	mi := &file_daemon_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DaemonList.ProtoReflect.Descriptor instead.
+func (*DaemonList) Descriptor() ([]byte, []int) {
+	return file_daemon_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DaemonList) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *DaemonList) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CronList) GetExp() string {
-	if x != nil {
-		return x.Exp
-	}
-	return ""
-}
-
-func (x *CronList) GetCommand() string {
+func (x *DaemonList) GetCommand() string {
 	if x != nil {
 		return x.Command
 	}
 	return ""
 }
 
-func (x *CronList) GetDesc() string {
+func (x *DaemonList) GetDesc() string {
 	if x != nil {
 		return x.Desc
 	}
 	return ""
 }
 
-func (x *CronList) GetCreatedAt() string {
+func (x *DaemonList) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return ""
 }
 
-func (x *CronList) GetUpdatedAt() string {
+func (x *DaemonList) GetUpdatedAt() string {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return ""
 }
 
-func (x *CronList) GetIsKiller() int32 {
+func (x *DaemonList) GetIsKiller() int32 {
 	if x != nil {
 		return x.IsKiller
 	}
@@ -551,7 +543,7 @@ type SearchPage struct {
 func (x *SearchPage) Reset() {
 	*x = SearchPage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[8]
+		mi := &file_daemon_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -564,7 +556,7 @@ func (x *SearchPage) String() string {
 func (*SearchPage) ProtoMessage() {}
 
 func (x *SearchPage) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[8]
+	mi := &file_daemon_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -577,7 +569,7 @@ func (x *SearchPage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchPage.ProtoReflect.Descriptor instead.
 func (*SearchPage) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{8}
+	return file_daemon_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SearchPage) GetPage() int32 {
@@ -604,7 +596,7 @@ type Error struct {
 func (x *Error) Reset() {
 	*x = Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_cron_proto_msgTypes[9]
+		mi := &file_daemon_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -617,7 +609,7 @@ func (x *Error) String() string {
 func (*Error) ProtoMessage() {}
 
 func (x *Error) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_proto_msgTypes[9]
+	mi := &file_daemon_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -630,31 +622,28 @@ func (x *Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Error.ProtoReflect.Descriptor instead.
 func (*Error) Descriptor() ([]byte, []int) {
-	return file_cron_proto_rawDescGZIP(), []int{9}
+	return file_daemon_proto_rawDescGZIP(), []int{9}
 }
 
-var File_cron_proto protoreflect.FileDescriptor
+var File_daemon_proto protoreflect.FileDescriptor
 
-var file_cron_proto_rawDesc = []byte{
-	0x0a, 0x0a, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x04, 0x63, 0x72,
-	0x6f, 0x6e, 0x22, 0x33, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x24, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x10, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x61, 0x67,
-	0x65, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x22, 0x34, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73,
-	0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x43, 0x72,
-	0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x2a, 0x0a,
-	0x0a, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x01, 0x72,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x43, 0x72,
-	0x6f, 0x6e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x01, 0x72, 0x22, 0x3d, 0x0a, 0x0d, 0x55, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x01, 0x72, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x43, 0x72, 0x6f,
-	0x6e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x01, 0x72, 0x22, 0x1f, 0x0a, 0x0d, 0x4b, 0x69, 0x6c, 0x6c,
-	0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1b, 0x0a, 0x09, 0x49, 0x64, 0x52,
+var file_daemon_proto_rawDesc = []byte{
+	0x0a, 0x0c, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06,
+	0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x22, 0x35, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x53, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x50, 0x61, 0x67, 0x65, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x22, 0x38, 0x0a,
+	0x0c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x28, 0x0a,
+	0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x64,
+	0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x44, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74,
+	0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x2c, 0x0a, 0x0a, 0x41, 0x64, 0x64, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x01, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x10, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x72, 0x6f, 0x6e, 0x42, 0x61,
+	0x73, 0x65, 0x52, 0x01, 0x72, 0x22, 0x3f, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0xe0, 0x01, 0x0a, 0x08, 0x43, 0x72, 0x6f, 0x6e, 0x42,
+	0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1e, 0x0a, 0x01, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x10, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x72, 0x6f, 0x6e, 0x42,
+	0x61, 0x73, 0x65, 0x52, 0x01, 0x72, 0x22, 0xe0, 0x01, 0x0a, 0x08, 0x43, 0x72, 0x6f, 0x6e, 0x42,
 	0x61, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x78, 0x70, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x65, 0x78, 0x70, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6d,
@@ -668,86 +657,91 @@ var file_cron_proto_rawDesc = []byte{
 	0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70,
 	0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
 	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x09, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0xc9, 0x01, 0x0a, 0x08, 0x43, 0x72,
+	0x09, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1f, 0x0a, 0x0d, 0x4b, 0x69, 0x6c,
+	0x6c, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1b, 0x0a, 0x09, 0x49, 0x64,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0xb9, 0x01, 0x0a, 0x0a, 0x44, 0x61, 0x65, 0x6d,
 	0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x78,
-	0x70, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x65, 0x78, 0x70, 0x12, 0x18, 0x0a, 0x07,
-	0x63, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63,
-	0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x65, 0x73, 0x63, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x73, 0x5f, 0x6b,
-	0x69, 0x6c, 0x6c, 0x65, 0x72, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x69, 0x73, 0x4b,
-	0x69, 0x6c, 0x6c, 0x65, 0x72, 0x22, 0x3d, 0x0a, 0x0a, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50,
-	0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x05, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f,
-	0x73, 0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65,
-	0x53, 0x69, 0x7a, 0x65, 0x22, 0x07, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x32, 0x91, 0x02,
-	0x0a, 0x04, 0x43, 0x72, 0x6f, 0x6e, 0x12, 0x2e, 0x0a, 0x05, 0x4c, 0x69, 0x73, 0x74, 0x73, 0x12,
-	0x11, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x12, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2f, 0x0a, 0x0c, 0x47, 0x65, 0x74, 0x46, 0x69, 0x72,
-	0x73, 0x74, 0x42, 0x79, 0x49, 0x64, 0x12, 0x0f, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x49, 0x64,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0e, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x43,
-	0x72, 0x6f, 0x6e, 0x42, 0x61, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x03, 0x41, 0x64, 0x64, 0x12, 0x10,
-	0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x0b, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x2a, 0x0a,
-	0x06, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x13, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0b, 0x2e, 0x63,
-	0x72, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x2a, 0x0a, 0x06, 0x4b, 0x69, 0x6c,
-	0x6c, 0x65, 0x72, 0x12, 0x13, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x4b, 0x69, 0x6c, 0x6c, 0x65,
-	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0b, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e,
-	0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x2a, 0x0a, 0x06, 0x4f, 0x6e, 0x4c, 0x69, 0x6e, 0x65, 0x12,
-	0x13, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x4b, 0x69, 0x6c, 0x6c, 0x65, 0x72, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x0b, 0x2e, 0x63, 0x72, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f,
-	0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f,
+	0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6d,
+	0x6d, 0x61, 0x6e, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x65, 0x73, 0x63, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x73, 0x5f, 0x6b, 0x69, 0x6c,
+	0x6c, 0x65, 0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x69, 0x73, 0x4b, 0x69, 0x6c,
+	0x6c, 0x65, 0x72, 0x22, 0x3d, 0x0a, 0x0a, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x61, 0x67,
+	0x65, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69,
+	0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69,
+	0x7a, 0x65, 0x22, 0x07, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x32, 0xab, 0x02, 0x0a, 0x06,
+	0x44, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x12, 0x32, 0x0a, 0x05, 0x4c, 0x69, 0x73, 0x74, 0x73, 0x12,
+	0x13, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x4c, 0x69,
+	0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x33, 0x0a, 0x0c, 0x47, 0x65,
+	0x74, 0x46, 0x69, 0x72, 0x73, 0x74, 0x42, 0x79, 0x49, 0x64, 0x12, 0x11, 0x2e, 0x64, 0x61, 0x65,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e,
+	0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x72, 0x6f, 0x6e, 0x42, 0x61, 0x73, 0x65, 0x12,
+	0x28, 0x0a, 0x03, 0x41, 0x64, 0x64, 0x12, 0x12, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e,
+	0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x64, 0x61, 0x65,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x2e, 0x0a, 0x06, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x12, 0x15, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x64, 0x61, 0x65,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x2e, 0x0a, 0x06, 0x4b, 0x69, 0x6c,
+	0x6c, 0x65, 0x72, 0x12, 0x15, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x4b, 0x69, 0x6c,
+	0x6c, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x64, 0x61, 0x65,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x2e, 0x0a, 0x06, 0x4f, 0x6e, 0x4c,
+	0x69, 0x6e, 0x65, 0x12, 0x15, 0x2e, 0x64, 0x61, 0x65, 0x6d, 0x6f, 0x6e, 0x2e, 0x4b, 0x69, 0x6c,
+	0x6c, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x64, 0x61, 0x65,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
-	file_cron_proto_rawDescOnce sync.Once
-	file_cron_proto_rawDescData = file_cron_proto_rawDesc
+	file_daemon_proto_rawDescOnce sync.Once
+	file_daemon_proto_rawDescData = file_daemon_proto_rawDesc
 )
 
-func file_cron_proto_rawDescGZIP() []byte {
-	file_cron_proto_rawDescOnce.Do(func() {
-		file_cron_proto_rawDescData = protoimpl.X.CompressGZIP(file_cron_proto_rawDescData)
+func file_daemon_proto_rawDescGZIP() []byte {
+	file_daemon_proto_rawDescOnce.Do(func() {
+		file_daemon_proto_rawDescData = protoimpl.X.CompressGZIP(file_daemon_proto_rawDescData)
 	})
-	return file_cron_proto_rawDescData
+	return file_daemon_proto_rawDescData
 }
 
-var file_cron_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
-var file_cron_proto_goTypes = []interface{}{
-	(*ListRequest)(nil),   // 0: cron.ListRequest
-	(*ListResponse)(nil),  // 1: cron.ListResponse
-	(*AddRequest)(nil),    // 2: cron.AddRequest
-	(*UpdateRequest)(nil), // 3: cron.UpdateRequest
-	(*KillerRequest)(nil), // 4: cron.KillerRequest
-	(*IdRequest)(nil),     // 5: cron.IdRequest
-	(*CronBase)(nil),      // 6: cron.CronBase
-	(*CronList)(nil),      // 7: cron.CronList
-	(*SearchPage)(nil),    // 8: cron.SearchPage
-	(*Error)(nil),         // 9: cron.Error
+var file_daemon_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_daemon_proto_goTypes = []interface{}{
+	(*ListRequest)(nil),   // 0: daemon.ListRequest
+	(*ListResponse)(nil),  // 1: daemon.ListResponse
+	(*AddRequest)(nil),    // 2: daemon.AddRequest
+	(*UpdateRequest)(nil), // 3: daemon.UpdateRequest
+	(*CronBase)(nil),      // 4: daemon.CronBase
+	(*KillerRequest)(nil), // 5: daemon.KillerRequest
+	(*IdRequest)(nil),     // 6: daemon.IdRequest
+	(*DaemonList)(nil),    // 7: daemon.DaemonList
+	(*SearchPage)(nil),    // 8: daemon.SearchPage
+	(*Error)(nil),         // 9: daemon.Error
 }
-var file_cron_proto_depIdxs = []int32{
-	8,  // 0: cron.ListRequest.page:type_name -> cron.SearchPage
-	7,  // 1: cron.ListResponse.items:type_name -> cron.CronList
-	6,  // 2: cron.AddRequest.r:type_name -> cron.CronBase
-	6,  // 3: cron.UpdateRequest.r:type_name -> cron.CronBase
-	0,  // 4: cron.Cron.Lists:input_type -> cron.ListRequest
-	5,  // 5: cron.Cron.GetFirstById:input_type -> cron.IdRequest
-	2,  // 6: cron.Cron.Add:input_type -> cron.AddRequest
-	3,  // 7: cron.Cron.Update:input_type -> cron.UpdateRequest
-	4,  // 8: cron.Cron.Killer:input_type -> cron.KillerRequest
-	4,  // 9: cron.Cron.OnLine:input_type -> cron.KillerRequest
-	1,  // 10: cron.Cron.Lists:output_type -> cron.ListResponse
-	6,  // 11: cron.Cron.GetFirstById:output_type -> cron.CronBase
-	9,  // 12: cron.Cron.Add:output_type -> cron.Error
-	9,  // 13: cron.Cron.Update:output_type -> cron.Error
-	9,  // 14: cron.Cron.Killer:output_type -> cron.Error
-	9,  // 15: cron.Cron.OnLine:output_type -> cron.Error
+var file_daemon_proto_depIdxs = []int32{
+	8,  // 0: daemon.ListRequest.page:type_name -> daemon.SearchPage
+	7,  // 1: daemon.ListResponse.items:type_name -> daemon.DaemonList
+	4,  // 2: daemon.AddRequest.r:type_name -> daemon.CronBase
+	4,  // 3: daemon.UpdateRequest.r:type_name -> daemon.CronBase
+	0,  // 4: daemon.Daemon.Lists:input_type -> daemon.ListRequest
+	6,  // 5: daemon.Daemon.GetFirstById:input_type -> daemon.IdRequest
+	2,  // 6: daemon.Daemon.Add:input_type -> daemon.AddRequest
+	3,  // 7: daemon.Daemon.Update:input_type -> daemon.UpdateRequest
+	5,  // 8: daemon.Daemon.Killer:input_type -> daemon.KillerRequest
+	5,  // 9: daemon.Daemon.OnLine:input_type -> daemon.KillerRequest
+	1,  // 10: daemon.Daemon.Lists:output_type -> daemon.ListResponse
+	4,  // 11: daemon.Daemon.GetFirstById:output_type -> daemon.CronBase
+	9,  // 12: daemon.Daemon.Add:output_type -> daemon.Error
+	9,  // 13: daemon.Daemon.Update:output_type -> daemon.Error
+	9,  // 14: daemon.Daemon.Killer:output_type -> daemon.Error
+	9,  // 15: daemon.Daemon.OnLine:output_type -> daemon.Error
 	10, // [10:16] is the sub-list for method output_type
 	4,  // [4:10] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
@@ -755,13 +749,13 @@ var file_cron_proto_depIdxs = []int32{
 	0,  // [0:4] is the sub-list for field type_name
 }
 
-func init() { file_cron_proto_init() }
-func file_cron_proto_init() {
-	if File_cron_proto != nil {
+func init() { file_daemon_proto_init() }
+func file_daemon_proto_init() {
+	if File_daemon_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_cron_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_daemon_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListRequest); i {
 			case 0:
 				return &v.state
@@ -773,7 +767,7 @@ func file_cron_proto_init() {
 				return nil
 			}
 		}
-		file_cron_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_daemon_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListResponse); i {
 			case 0:
 				return &v.state
@@ -785,7 +779,7 @@ func file_cron_proto_init() {
 				return nil
 			}
 		}
-		file_cron_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_daemon_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddRequest); i {
 			case 0:
 				return &v.state
@@ -797,7 +791,7 @@ func file_cron_proto_init() {
 				return nil
 			}
 		}
-		file_cron_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_daemon_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateRequest); i {
 			case 0:
 				return &v.state
@@ -809,31 +803,7 @@ func file_cron_proto_init() {
 				return nil
 			}
 		}
-		file_cron_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*KillerRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cron_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*IdRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_cron_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_daemon_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CronBase); i {
 			case 0:
 				return &v.state
@@ -845,8 +815,8 @@ func file_cron_proto_init() {
 				return nil
 			}
 		}
-		file_cron_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CronList); i {
+		file_daemon_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*KillerRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -857,7 +827,31 @@ func file_cron_proto_init() {
 				return nil
 			}
 		}
-		file_cron_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_daemon_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IdRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_daemon_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DaemonList); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_daemon_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchPage); i {
 			case 0:
 				return &v.state
@@ -869,7 +863,7 @@ func file_cron_proto_init() {
 				return nil
 			}
 		}
-		file_cron_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_daemon_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Error); i {
 			case 0:
 				return &v.state
@@ -886,20 +880,20 @@ func file_cron_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_cron_proto_rawDesc,
+			RawDescriptor: file_daemon_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_cron_proto_goTypes,
-		DependencyIndexes: file_cron_proto_depIdxs,
-		MessageInfos:      file_cron_proto_msgTypes,
+		GoTypes:           file_daemon_proto_goTypes,
+		DependencyIndexes: file_daemon_proto_depIdxs,
+		MessageInfos:      file_daemon_proto_msgTypes,
 	}.Build()
-	File_cron_proto = out.File
-	file_cron_proto_rawDesc = nil
-	file_cron_proto_goTypes = nil
-	file_cron_proto_depIdxs = nil
+	File_daemon_proto = out.File
+	file_daemon_proto_rawDesc = nil
+	file_daemon_proto_goTypes = nil
+	file_daemon_proto_depIdxs = nil
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -910,10 +904,10 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// CronClient is the client API for Cron service.
+// DaemonClient is the client API for Daemon service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type CronClient interface {
+type DaemonClient interface {
 	// 获取列表页
 	Lists(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 	GetFirstById(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*CronBase, error)
@@ -927,70 +921,70 @@ type CronClient interface {
 	OnLine(ctx context.Context, in *KillerRequest, opts ...grpc.CallOption) (*Error, error)
 }
 
-type cronClient struct {
+type daemonClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCronClient(cc grpc.ClientConnInterface) CronClient {
-	return &cronClient{cc}
+func NewDaemonClient(cc grpc.ClientConnInterface) DaemonClient {
+	return &daemonClient{cc}
 }
 
-func (c *cronClient) Lists(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
+func (c *daemonClient) Lists(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
 	out := new(ListResponse)
-	err := c.cc.Invoke(ctx, "/cron.Cron/Lists", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/daemon.Daemon/Lists", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cronClient) GetFirstById(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*CronBase, error) {
+func (c *daemonClient) GetFirstById(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*CronBase, error) {
 	out := new(CronBase)
-	err := c.cc.Invoke(ctx, "/cron.Cron/GetFirstById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/daemon.Daemon/GetFirstById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cronClient) Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*Error, error) {
+func (c *daemonClient) Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*Error, error) {
 	out := new(Error)
-	err := c.cc.Invoke(ctx, "/cron.Cron/Add", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/daemon.Daemon/Add", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cronClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*Error, error) {
+func (c *daemonClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*Error, error) {
 	out := new(Error)
-	err := c.cc.Invoke(ctx, "/cron.Cron/Update", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/daemon.Daemon/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cronClient) Killer(ctx context.Context, in *KillerRequest, opts ...grpc.CallOption) (*Error, error) {
+func (c *daemonClient) Killer(ctx context.Context, in *KillerRequest, opts ...grpc.CallOption) (*Error, error) {
 	out := new(Error)
-	err := c.cc.Invoke(ctx, "/cron.Cron/Killer", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/daemon.Daemon/Killer", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cronClient) OnLine(ctx context.Context, in *KillerRequest, opts ...grpc.CallOption) (*Error, error) {
+func (c *daemonClient) OnLine(ctx context.Context, in *KillerRequest, opts ...grpc.CallOption) (*Error, error) {
 	out := new(Error)
-	err := c.cc.Invoke(ctx, "/cron.Cron/OnLine", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/daemon.Daemon/OnLine", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CronServer is the server API for Cron service.
-type CronServer interface {
+// DaemonServer is the server API for Daemon service.
+type DaemonServer interface {
 	// 获取列表页
 	Lists(context.Context, *ListRequest) (*ListResponse, error)
 	GetFirstById(context.Context, *IdRequest) (*CronBase, error)
@@ -1004,170 +998,170 @@ type CronServer interface {
 	OnLine(context.Context, *KillerRequest) (*Error, error)
 }
 
-// UnimplementedCronServer can be embedded to have forward compatible implementations.
-type UnimplementedCronServer struct {
+// UnimplementedDaemonServer can be embedded to have forward compatible implementations.
+type UnimplementedDaemonServer struct {
 }
 
-func (*UnimplementedCronServer) Lists(context.Context, *ListRequest) (*ListResponse, error) {
+func (*UnimplementedDaemonServer) Lists(context.Context, *ListRequest) (*ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Lists not implemented")
 }
-func (*UnimplementedCronServer) GetFirstById(context.Context, *IdRequest) (*CronBase, error) {
+func (*UnimplementedDaemonServer) GetFirstById(context.Context, *IdRequest) (*CronBase, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFirstById not implemented")
 }
-func (*UnimplementedCronServer) Add(context.Context, *AddRequest) (*Error, error) {
+func (*UnimplementedDaemonServer) Add(context.Context, *AddRequest) (*Error, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
 }
-func (*UnimplementedCronServer) Update(context.Context, *UpdateRequest) (*Error, error) {
+func (*UnimplementedDaemonServer) Update(context.Context, *UpdateRequest) (*Error, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (*UnimplementedCronServer) Killer(context.Context, *KillerRequest) (*Error, error) {
+func (*UnimplementedDaemonServer) Killer(context.Context, *KillerRequest) (*Error, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Killer not implemented")
 }
-func (*UnimplementedCronServer) OnLine(context.Context, *KillerRequest) (*Error, error) {
+func (*UnimplementedDaemonServer) OnLine(context.Context, *KillerRequest) (*Error, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnLine not implemented")
 }
 
-func RegisterCronServer(s *grpc.Server, srv CronServer) {
-	s.RegisterService(&_Cron_serviceDesc, srv)
+func RegisterDaemonServer(s *grpc.Server, srv DaemonServer) {
+	s.RegisterService(&_Daemon_serviceDesc, srv)
 }
 
-func _Cron_Lists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Daemon_Lists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CronServer).Lists(ctx, in)
+		return srv.(DaemonServer).Lists(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cron.Cron/Lists",
+		FullMethod: "/daemon.Daemon/Lists",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CronServer).Lists(ctx, req.(*ListRequest))
+		return srv.(DaemonServer).Lists(ctx, req.(*ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cron_GetFirstById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Daemon_GetFirstById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CronServer).GetFirstById(ctx, in)
+		return srv.(DaemonServer).GetFirstById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cron.Cron/GetFirstById",
+		FullMethod: "/daemon.Daemon/GetFirstById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CronServer).GetFirstById(ctx, req.(*IdRequest))
+		return srv.(DaemonServer).GetFirstById(ctx, req.(*IdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cron_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Daemon_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CronServer).Add(ctx, in)
+		return srv.(DaemonServer).Add(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cron.Cron/Add",
+		FullMethod: "/daemon.Daemon/Add",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CronServer).Add(ctx, req.(*AddRequest))
+		return srv.(DaemonServer).Add(ctx, req.(*AddRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cron_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Daemon_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CronServer).Update(ctx, in)
+		return srv.(DaemonServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cron.Cron/Update",
+		FullMethod: "/daemon.Daemon/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CronServer).Update(ctx, req.(*UpdateRequest))
+		return srv.(DaemonServer).Update(ctx, req.(*UpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cron_Killer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Daemon_Killer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(KillerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CronServer).Killer(ctx, in)
+		return srv.(DaemonServer).Killer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cron.Cron/Killer",
+		FullMethod: "/daemon.Daemon/Killer",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CronServer).Killer(ctx, req.(*KillerRequest))
+		return srv.(DaemonServer).Killer(ctx, req.(*KillerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cron_OnLine_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Daemon_OnLine_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(KillerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CronServer).OnLine(ctx, in)
+		return srv.(DaemonServer).OnLine(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cron.Cron/OnLine",
+		FullMethod: "/daemon.Daemon/OnLine",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CronServer).OnLine(ctx, req.(*KillerRequest))
+		return srv.(DaemonServer).OnLine(ctx, req.(*KillerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Cron_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "cron.Cron",
-	HandlerType: (*CronServer)(nil),
+var _Daemon_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "daemon.Daemon",
+	HandlerType: (*DaemonServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Lists",
-			Handler:    _Cron_Lists_Handler,
+			Handler:    _Daemon_Lists_Handler,
 		},
 		{
 			MethodName: "GetFirstById",
-			Handler:    _Cron_GetFirstById_Handler,
+			Handler:    _Daemon_GetFirstById_Handler,
 		},
 		{
 			MethodName: "Add",
-			Handler:    _Cron_Add_Handler,
+			Handler:    _Daemon_Add_Handler,
 		},
 		{
 			MethodName: "Update",
-			Handler:    _Cron_Update_Handler,
+			Handler:    _Daemon_Update_Handler,
 		},
 		{
 			MethodName: "Killer",
-			Handler:    _Cron_Killer_Handler,
+			Handler:    _Daemon_Killer_Handler,
 		},
 		{
 			MethodName: "OnLine",
-			Handler:    _Cron_OnLine_Handler,
+			Handler:    _Daemon_OnLine_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "cron.proto",
+	Metadata: "daemon.proto",
 }

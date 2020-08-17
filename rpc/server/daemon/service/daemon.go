@@ -4,23 +4,22 @@ import (
 	"context"
 	"licron.com/global"
 	"licron.com/model"
-	pb "licron.com/rpc/protoc/cron"
+	pb "licron.com/rpc/protoc/daemon"
 )
 
 // CronRpc 数据服务
-type CronRpc struct {
-	m model.Cron
+type DaemonRpc struct {
+	m model.Daemon
 }
 
-func (c *CronRpc) Lists(ctx context.Context, r *pb.ListRequest) (*pb.ListResponse, error) {
+func (c *DaemonRpc) Lists(ctx context.Context, r *pb.ListRequest) (*pb.ListResponse, error) {
 	//获取全部的cronList数据
 	all, _ := c.m.GetAll()
 	data := &pb.ListResponse{Items: nil}
 	for _, v := range all {
-		d := pb.CronList{
+		d := pb.DaemonList{
 			Id:        int32(v.ID),
 			Name:      v.Name,
-			Exp:       v.Exp,
 			Command:   v.Command,
 			Desc:      v.Desc,
 			CreatedAt: v.CreatedAt.String(),
@@ -31,14 +30,13 @@ func (c *CronRpc) Lists(ctx context.Context, r *pb.ListRequest) (*pb.ListRespons
 	}
 	return data, nil
 }
-func (c *CronRpc) GetFirstById(ctx context.Context, in *pb.IdRequest) (*pb.CronBase, error) {
+func (c *DaemonRpc) GetFirstById(ctx context.Context, in *pb.IdRequest) (*pb.CronBase, error) {
 	cron, err := c.m.GetFirstById(int(in.Id))
 	if err != nil {
 		return nil, err
 	}
 	p := &pb.CronBase{
 		Name:      cron.Name,
-		Exp:       cron.Exp,
 		Command:   cron.Command,
 		Desc:      cron.Desc,
 		IsKiller:  int32(cron.IsKiller),
@@ -49,10 +47,9 @@ func (c *CronRpc) GetFirstById(ctx context.Context, in *pb.IdRequest) (*pb.CronB
 	}
 	return p, nil
 }
-func (c *CronRpc) Add(ctx context.Context, r *pb.AddRequest) (*pb.Error, error) {
-	m := model.Cron{
+func (c *DaemonRpc) Add(ctx context.Context, r *pb.AddRequest) (*pb.Error, error) {
+	m := model.Daemon{
 		Name:     r.R.Name,
-		Exp:      r.R.Exp,
 		Command:  r.R.Command,
 		Desc:     r.R.Desc,
 		IsKiller: 0,
@@ -64,20 +61,19 @@ func (c *CronRpc) Add(ctx context.Context, r *pb.AddRequest) (*pb.Error, error) 
 	return p, nil
 }
 
-func (c *CronRpc) Update(ctx context.Context, r *pb.UpdateRequest) (*pb.Error, error) {
-	var m = model.Cron{
+func (c *DaemonRpc) Update(ctx context.Context, r *pb.UpdateRequest) (*pb.Error, error) {
+	var m = model.Daemon{
 		Name:     r.R.Name,
-		Exp:      r.R.Exp,
 		Command:  r.R.Command,
 		Desc:     r.R.Desc,
 		IsKiller: int(r.R.IsKiller),
 	}
-	err := c.m.UpdateById(r.Id, &m)
+	err := c.m.UpdateById(int(r.Id), &m)
 	p := &pb.Error{}
 	return p, err
 }
 
-func (c *CronRpc) Killer(ctx context.Context, r *pb.KillerRequest) (*pb.Error, error) {
+func (c *DaemonRpc) Killer(ctx context.Context, r *pb.KillerRequest) (*pb.Error, error) {
 	id := r.Id
 	if _, err := c.m.GetFirstById(int(id)); err != nil {
 		return nil, err
@@ -87,7 +83,7 @@ func (c *CronRpc) Killer(ctx context.Context, r *pb.KillerRequest) (*pb.Error, e
 	return p, err
 }
 
-func (c *CronRpc) OnLine(ctx context.Context, r *pb.KillerRequest) (*pb.Error, error) {
+func (c *DaemonRpc) OnLine(ctx context.Context, r *pb.KillerRequest) (*pb.Error, error) {
 	id := r.Id
 	if _, err := c.m.GetFirstById(int(id)); err != nil {
 		return nil, err

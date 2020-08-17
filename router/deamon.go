@@ -9,6 +9,8 @@ import (
 func DeamonRouter(r *gin.RouterGroup) {
 	group := r.Group("/daemon")
 	{
+		// 列表
+		group.POST("/lists", deamon.Lists)
 		// 添加
 		group.POST("/add", deamon.Add)
 		// 杀死任务

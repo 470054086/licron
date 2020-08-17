@@ -5,7 +5,12 @@
 # 使用方式
 1. 执行cron.sql 生成sql表和测试数据
 2. config-local.yaml 配置文件 更改数据库链接方式,http端口
-3. go run mian.go 启动服务
+3. 启动rpc服务器
+   1. go run rpc/server/cron/main.go
+   2. go run rpc/server/daemon/main.go
+    
+3. 启动http服务器 
+   1. go run mian.go 启动服务
 
 # 效果
 ```cassandraql
@@ -24,6 +29,7 @@
 2. cron/add    添加定时任务
 3. cron/kill 杀死定时任务
 ## 常驻内存接口使用方式
+1. daemon/lists 获取常驻内存列表
 1. daemon/add  添加任务
 2. daemon/kill  杀死任务
 ## 一次性任务接口使用方式

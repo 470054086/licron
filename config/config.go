@@ -8,10 +8,14 @@ type Config struct {
 
 type app struct {
 	// 域名
-	Domain   string `json:"domain" yaml:"domain"`
-	Port     string `json:"port" yaml:"port"`
-	DbType   string `json:"dbtype" yaml:"dbtype"`
-	Schedule string `json:"schedule" yaml:"schedule"`
+	Domain        string `json:"domain" yaml:"domain"`
+	Port          string `json:"port" yaml:"port"`
+	DbType        string `json:"dbtype" yaml:"dbtype"`
+	Schedule      string `json:"schedule" yaml:"schedule"`
+	CronRpcPort   string `json:"cronrpcport" yaml:"cronrpcport"`
+	CronRpcHost   string `json:"cronrpchost" yaml:"cronrpchost"`
+	DaemonRpcHost string `json:"daemonrpchost" yaml:"daemonrpchost"`
+	DaemonRpcPort string `json:"daemonrpcport" yaml:"daemonrpcport"`
 }
 type log struct {
 	// 日志地址

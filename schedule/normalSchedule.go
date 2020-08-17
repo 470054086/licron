@@ -3,6 +3,7 @@ package schedule
 import (
 	"context"
 	"github.com/gorhill/cronexpr"
+	"licron.com/global"
 	"licron.com/schedule/cmd"
 	"licron.com/schedule/constans"
 	"licron.com/schedule/types"
@@ -39,11 +40,11 @@ func (s *SimpleSchedule) Run() {
 	// 获取所有的消息处理
 	go s.schedule()
 	// 获取到全部的计划任务
-	crons, _ := s.cronModel.GetAll()
+	crons, _ := global.G_RPC_CRON.Lists(context.Background(), nil)
 	//解析全部的任务 获取到任务的下次执行时间
-	for _, r := range crons {
+	for _, r := range crons.Items {
 		t := &types.Cron{
-			ID:       r.ID,
+			ID:       int(r.Id),
 			Name:     r.Name,
 			Exp:      r.Exp,
 			Command:  r.Command,

@@ -2,6 +2,7 @@ package model
 
 import (
 	"licron.com/global"
+	"time"
 )
 
 // model类
@@ -11,6 +12,8 @@ type Daemon struct {
 	Command  string
 	Desc     string
 	IsKiller int
+	CreatedAt time.Time `gorm:"column:created_at"`
+	UpdatedAt time.Time `gorm:"column:updated_at"`
 }
 
 func (c Daemon) TableName() string {
@@ -24,6 +27,11 @@ func (c Daemon) GetAll() ([]*Daemon, error) {
 		return nil, err
 	}
 	return r, nil
+}
+
+func (c Daemon) UpdateById(id int,daemon *Daemon) error {
+	err := global.G_DB.Where("id = ? and is_killer = ?", id, 0).Update(&daemon).Error
+	return err
 }
 
 // 获取单个任务

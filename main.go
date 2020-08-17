@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	_ "licron.com/core"
 	"licron.com/global"
 	"licron.com/initialize"
@@ -15,7 +16,14 @@ func main() {
 	initialize.InitMysql()
 	defer global.G_DB.Close()
 	// 启动redis
-
+	client := initialize.InitRpcClient()
+	// 程序退出 退出所有的链接
+	defer func() {
+		for _, v := range client {
+			v.Close()
+		}
+	}()
+	global.G_LOG.Info(fmt.Sprintf("rpc server is success"))
 	// 启动ectd
 	initialize.InitSchedule()
 

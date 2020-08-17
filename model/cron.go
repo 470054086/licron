@@ -38,6 +38,12 @@ func (c Cron) GetFirstById(id int) (*Cron, error) {
 	return &r, nil
 }
 
+// 修改某些字段
+func (c Cron) UpdateById(id int32, update *Cron) error {
+	err := global.G_DB.Where("id = ? and is_killer = ?", id, 0).Update(&update).Error
+	return err
+}
+
 // 杀死任务
 func (c Cron) Killer(id int) error {
 	r := Cron{IsKiller: 1}
